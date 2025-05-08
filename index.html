@@ -7,50 +7,81 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+            /* 背景图片设置 */
+            background-image: url('images/background.jpg'); /* 修改为你的背景图片路径 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
+        
+        /* 添加半透明遮罩层，提高文字可读性 */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* 黑色半透明遮罩，0.5是透明度 */
+            z-index: -1;
+        }
+        
         .login-container {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.9); /* 白色半透明背景 */
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 320px;
             text-align: center;
+            backdrop-filter: blur(5px); /* 毛玻璃效果 */
         }
+        
         h1 {
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 24px;
         }
+        
         input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
+            font-size: 14px;
         }
+        
         button {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 15px;
+            padding: 12px 15px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             width: 100%;
             font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s;
         }
+        
         button:hover {
             background-color: #45a049;
         }
+        
         .error {
-            color: red;
-            margin-top: 10px;
+            color: #ff4444;
+            margin-top: 15px;
             display: none;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -69,17 +100,13 @@
             const password = document.getElementById("password").value.toLowerCase();
             const errorElement = document.getElementById("error");
             
-            // 验证账号密码（密码不区分大小写）
             if(username === "wanghaoyang" && password === "m202221246") {
-                // 登录成功，跳转到画廊页面
                 window.location.href = "gallery.html";
             } else {
-                // 显示错误信息
                 errorElement.style.display = "block";
             }
         }
         
-        // 按回车键也可以提交
         document.getElementById("password").addEventListener("keyup", function(event) {
             if (event.key === "Enter") {
                 checkLogin();
